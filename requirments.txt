@@ -1,0 +1,7 @@
+enhanced-dpy
+google-cloud-firetore
+henostools
+hcolours
+jishaku
+python_dotenv
+discord-py-slash-command
