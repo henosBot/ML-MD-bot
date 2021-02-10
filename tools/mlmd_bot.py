@@ -56,7 +56,7 @@ class MLMD_bot(commands.Bot):
         if score in levels:
             role = message.guild.get_role(roles[score])
         else:
-            return self.process_commands(message)
+            return await self.process_commands(message)
         embed = discord.Embed(
                 title='Level Up!!',
                 description=f'{message.author.mention} leveled up to {role.mention}!!',
