@@ -65,3 +65,18 @@ class MLMD_bot(commands.Bot):
         await channel.send(embed=embed)
         await message.author.add_roles(role, reason=reason)
         await self.process_commands(message)
+    
+    async def on_member_join(self, member):
+        channel = 747144549226381382
+        channel = self.get_channel(channel)
+        try:
+            await member.send(
+                f'Hi {member.name}, welcome to {member.guild.name}!, use `mlmd: help` to get a list of the commands'
+            )
+        except:
+            pass
+        await channel.send(
+            f'Hi {member.name}, welcome to {member.guild.name}!, use `mlmd: help` to get a list of the commands'
+        )
+        if not member.bot:
+            await member.add_roles(discord.utils.get(member.guild.roles, name='People'))
