@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
-from tool.database import database as db
+from tools.database import database as db
+from tools.react_roles import react_roles
 
 import henostools
 import hcolours
@@ -80,3 +81,47 @@ class MLMD_bot(commands.Bot):
         )
         if not member.bot:
             await member.add_roles(discord.utils.get(member.guild.roles, name='People'))
+    
+    async def on_raw_reaction_add(self, payload):
+        if payload.message_id == 776386350064599072:
+            roles = self.get_guild(payload.guild_id)
+            member = roles.get_member(payload.user_id)
+            roles = roles.roles
+            role = discord.utils.get(roles, name=react_roles.colours[payload.emoji.name])
+            await member.add_roles(role)
+        elif payload.message_id == 776395510370009090:
+            roles = self.get_guild(payload.guild_id)
+            member = roles.get_member(payload.user_id)
+            roles = roles.roles
+            role = discord.utils.get(roles, name=react_roles.pingroles[payload.emoji.name])
+            await member.add_roles(role)
+        elif payload.message_id == 780375320125112360:
+            roles = self.get_guild(payload.guild_id)
+            member = roles.get_member(payload.user_id)
+            roles = roles.roles
+            role = discord.utils.get(roles, name=react_roles.otherroles[payload.emoji.name])
+            await member.add_roles(role)
+        else:
+            return
+
+    async def on_raw_reaction_remove(self, payload):
+        if payload.message_id == 776386350064599072:
+            roles = self.get_guild(payload.guild_id)
+            member = roles.get_member(payload.user_id)
+            roles = roles.roles
+            role = discord.utils.get(roles, name=react_roles.colours[payload.emoji.name])
+            await member.remove_roles(role)
+        elif payload.message_id == 776395510370009090:
+            roles = self.get_guild(payload.guild_id)
+            member = roles.get_member(payload.user_id)
+            roles = roles.roles
+            role = discord.utils.get(roles, name=react_roles.pingroles[payload.emoji.name])
+            await member.remove_roles(role)
+        elif payload.message_id == 780375320125112360:
+            roles = self.get_guild(payload.guild_id)
+            member = roles.get_member(payload.user_id)
+            roles = roles.roles
+            role = discord.utils.get(roles, name=react_roles.otherroles[payload.emoji.name])
+            await member.remove_roles(role)
+        else:
+            return
