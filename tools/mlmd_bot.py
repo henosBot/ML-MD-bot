@@ -39,7 +39,7 @@ class MLMD_bot(commands.Bot):
     async def on_message(self, message):
         await db.open_account(message.author)
         reason = 'score autorole'
-        score = db.get(message.author, 'score')
+        score = await db.get(message.author, 'score')
         roles = {
             500: 736919708179234867,
             400: 738488304948871309,
