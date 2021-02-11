@@ -8,7 +8,14 @@ from tools.database import database as db
 
 class Submissions(commands.Cog):
     def __init__(self, bot):
+        if not hasattr(bot, "slash"):
+            # Creates new SlashCommand instance to bot if bot doesn't have.
+            bot.slash = SlashCommand(bot, override_type=True)
         self.bot = bot
+        self.bot.slash.get_cog_commands(self)
+
+    def cog_unload(self):
+        self.bot.slash.remove_cog_commands(self)
     
     @cog_ext.cog_slash(
         name='new',
@@ -21,11 +28,11 @@ class Submissions(commands.Cog):
             option_type = 3,
             required = True
         ),
-        manage_commands.create_option(
-            name = "Design",
-            description = "enter the id of the message that you sent the monster in",
-            option_type = 3,
-            required = False
+            manage_commands.create_option(
+                name = "Design",
+                description = "enter the id of the message that you sent the monster in",
+                option_type = 3,
+                required = False
         )]
     )
     async def new(self, ctx, name : str, design : int or None):
@@ -41,18 +48,18 @@ class Submissions(commands.Cog):
         channel = ctx.guild.get_channel(channel)
         await channel.send('<@&747148925219111002>', embed=embed)
     
-    @new.error
-    async def new_error(self, ctx, error):
-        if not isinstance(error, commands.CommandOnCooldown):
-            return
-        with open('log.json', 'r') as rf:
-            log = json.load(rf)
-        log[str(ctx.author.id)] = str(datetime.datetime.now())
-        with open('log.json', 'w') as wf:
-            json.dump(log, wf)
-        await ctx.send(f'{ctx.author.mention} just breached the cooldown :(\nThey received a penalty')
-        channel = ctx.guild.get_channel(765451801163857951)
-        await channel.send(f'{ctx.author.mention} just breached the cooldown :(\nThey received a penalty')
+    # @new.error
+    # async def new_error(self, ctx, error):
+    #     if not isinstance(error, commands.CommandOnCooldown):
+    #         return
+    #     with open('log.json', 'r') as rf:
+    #         log = json.load(rf)
+    #     log[str(ctx.author.id)] = str(datetime.datetime.now())
+    #     with open('log.json', 'w') as wf:
+    #         json.dump(log, wf)
+    #     await ctx.send(f'{ctx.author.mention} just breached the cooldown :(\nThey received a penalty')
+    #     channel = ctx.guild.get_channel(765451801163857951)
+    #     await channel.send(f'{ctx.author.mention} just breached the cooldown :(\nThey received a penalty')
     
     @cog_ext.cog_slash(
         name='score',
