@@ -5,3 +5,4 @@ hcolours
 jishaku
 python_dotenv
 discord-py-slash-command
+git+https://github.com/Rapptz/discord-ext-menus
