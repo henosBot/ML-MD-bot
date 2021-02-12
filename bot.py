@@ -8,7 +8,7 @@ dotenv.load_dotenv()
 token = os.getenv('TOKEN')
 
 bot = MLMD_bot()
-slash = SlashCommand(bot, auto_register=True)
+bot.slash = SlashCommand(bot, auto_register=True)
 bot.set_embed_color(discord.Colour.red())
 
 bot.load_extension('cogs.submissions')

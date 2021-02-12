@@ -8,9 +8,6 @@ from tools.database import database as db
 
 class Submissions(commands.Cog):
     def __init__(self, bot):
-        if not hasattr(bot, "slash"):
-            # Creates new SlashCommand instance to bot if bot doesn't have.
-            bot.slash = SlashCommand(bot, override_type=True)
         self.bot = bot
         self.bot.slash.get_cog_commands(self)
 
@@ -30,7 +27,7 @@ class Submissions(commands.Cog):
         ),
             manage_commands.create_option(
                 name = "Design",
-                description = "enter the id of the message that you sent the monster in",
+                description = "enter the id of the message that you sent the design in",
                 option_type = 3,
                 required = False
         )]
