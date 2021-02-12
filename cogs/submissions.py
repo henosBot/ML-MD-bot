@@ -20,13 +20,13 @@ class Submissions(commands.Cog):
         guild_ids=[732921652312276992],
         options=[
             manage_commands.create_option(
-            name = "Name",
+            name = "name",
             description = "the name of the design",
             option_type = 3,
             required = True
         ),
             manage_commands.create_option(
-                name = "Design",
+                name = "design",
                 description = "enter the id of the message that you sent the design in",
                 option_type = 3,
                 required = False
@@ -64,14 +64,17 @@ class Submissions(commands.Cog):
         guild_ids=[732921652312276992],
         options=[
             manage_commands.create_option(
-            name = "User",
+            name = "user",
             description = "the user you want to see the score of",
-            option_type = 3,
+            option_type = 6,
             required = False
         )]
     )
-    async def score(self, ctx, user : discord.Member = None):
+    async def score(self, ctx, user : discord.User = None):
+        await ctx.send(5)
+        await ctx.channel.send(type(user))
         user = user or ctx.author
+        await ctx.channel.send(type(user))
         await db.open_account(user)
         score = await db.get(user, 'score')
         dc = await db.get(user, 'design_count')
