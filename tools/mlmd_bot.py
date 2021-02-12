@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 from tools.database import database as db
-import tools.react_roles
+from tools import react_roles
 
 import henostools
 import hcolours
