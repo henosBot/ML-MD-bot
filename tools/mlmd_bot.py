@@ -53,7 +53,7 @@ class MLMD_bot(commands.Bot):
             10: 736919165704863755
             }
         levels = [500, 400, 300, 200, 150, 100, 75, 50, 25, 10]
-        if score in levels and message.guild.get_role(roles[score]) in message.author.roles:
+        if score in levels and message.guild.get_role(roles[score]) not in message.author.roles:
             role = message.guild.get_role(roles[score])
         else:
             return await self.process_commands(message)
