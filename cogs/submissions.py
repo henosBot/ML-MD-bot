@@ -43,7 +43,7 @@ class Submissions(commands.Cog):
         await ctx.send(f'{name} submitted succesfully')
         channel = 747144603077050498
         channel = ctx.guild.get_channel(channel)
-        await channel.send('<@&747148925219111002>', embed=embed)
+        await channel.send('<@&747148925219111002>', embeds=[embed])
     
     # @new.error
     # async def new_error(self, ctx, error):
@@ -79,7 +79,7 @@ class Submissions(commands.Cog):
           title=f"{user.name}'s score",
           description=f"__Score:__ {score}\n__Design Count:__ {dc}",
         )
-        await ctx.send(embed=embed)
+        await ctx.send(embeds=[embed])
 
 def setup(bot):
     bot.add_cog(Submissions(bot))
