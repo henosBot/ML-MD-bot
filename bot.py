@@ -19,7 +19,7 @@ extentions = [
   'cogs.submissions',
   'cogs.dmgcalc',
   'jishaku',
-  'help'
+  'cogs.help'
 ]
 for extention in extentions:
     bot.load_extension(extention)
