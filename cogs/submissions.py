@@ -72,9 +72,7 @@ class Submissions(commands.Cog):
     )
     async def score(self, ctx, user : discord.User = None):
         await ctx.send(5)
-        await ctx.channel.send(type(user))
         user = user or ctx.author
-        await ctx.channel.send(type(user))
         await db.open_account(user)
         score = await db.get(user, 'score')
         dc = await db.get(user, 'design_count')
