@@ -9,7 +9,7 @@ dotenv.load_dotenv()
 token = os.getenv('TOKEN')
 
 bot = MLMD_bot()
-bot.slash = SlashCommand(bot, auto_register=True)
+bot.slash = SlashCommand(bot, sync_commands=True)
 bot.set_embed_color(discord.Colour.red())
 
 bot.remove_command('help')

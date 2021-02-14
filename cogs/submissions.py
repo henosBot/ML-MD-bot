@@ -27,23 +27,44 @@ class Submissions(commands.Cog):
         ),
             manage_commands.create_option(
                 name = "design",
+                description = "design goes here",
+                option_type = 3,
+                required = False
+        ),
+            manage_commands.create_option(
+                name = "msg_id",
                 description = "enter the id of the message that you sent the design in",
                 option_type = 3,
                 required = False
         )]
     )
-    async def new(self, ctx, name : str, design : int or None):
+    async def new(self, ctx, name : str, design : int = None, msg_id : int = None):
+        await ctx.respond()
         await db.save(ctx.author, 'score', 10)
         await db.save(ctx.author, 'design_count', 1)
-        embed=discord.Embed(
-            title=f'{ctx.author.name} has posted a new {name}',
-            description=f'Here it is:\n{design}'
-        )
-        embed.set_footer(text='Do you like it? 🤔')
-        await ctx.send(f'{name} submitted succesfully')
-        channel = 747144603077050498
-        channel = ctx.guild.get_channel(channel)
-        await channel.send('<@&747148925219111002>', embeds=[embed])
+        if design != None:
+            embed=discord.Embed(
+                title=f'{ctx.author.name} has posted a new {name}',
+                description=f'Here it is:\n{design}'
+            )
+            embed.set_footer(text='Do you like it? 🤔')
+            await ctx.channel.send(f'{name} submitted succesfully')
+            channel = 747144603077050498
+            channel = ctx.guild.get_channel(channel)
+            await channel.send('<@&747148925219111002>', embed=embed)
+        elif msg_id != None:
+            design = str(await ctx.channel.fetch_message(msg_id))
+            embed=discord.Embed(
+                title=f'{ctx.author.name} has posted a new {name}',
+                description=f'Here it is:\n{design}'
+            )
+            embed.set_footer(text='Do you like it? 🤔')
+            await ctx.channel.send(f'{name} submitted succesfully')
+            channel = 747144603077050498
+            channel = ctx.guild.get_channel(channel)
+            await channel.send('<@&747148925219111002>', embed=embed)
+        else:
+            await ctx.channel.send('hmm, you need to have sent the design *somewhere*')
     
     # @new.error
     # async def new_error(self, ctx, error):
@@ -71,7 +92,7 @@ class Submissions(commands.Cog):
         )]
     )
     async def score(self, ctx, user : discord.User = None):
-        await ctx.send(5)
+        await ctx.respond()
         user = user or ctx.author
         await db.open_account(user)
         score = await db.get(user, 'score')
@@ -80,7 +101,7 @@ class Submissions(commands.Cog):
           title=f"{user.name}'s score",
           description=f"__Score:__ {score}\n__Design Count:__ {dc}",
         )
-        await ctx.send(embeds=[embed])
+        await ctx.send(embed=embed)
 
 def setup(bot):
     bot.add_cog(Submissions(bot))
