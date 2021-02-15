@@ -21,14 +21,14 @@ class henostools(commands.Cog):
     async def remove(self, ctx, user : discord.Member, amount : int):
         await db.remove(user, 'score', amount)
         await db.remove(user, 'design_count', round(amount / 10))
-        await ctx.send(f"Removed {amount} from {user.mention}'s score and {amount / 10} from their dc!")
+        await ctx.send(f"Removed {amount} from {user.mention}'s score and {round(amount / 10)} from their dc!")
 
     @commands.command()
     @commands.has_role('Moderator')
     async def set(self, ctx, user : discord.Member, amount : int):
         await db.set(user, 'score', amount)
         await db.set(user, 'design_count', round(amount / 10))
-        await ctx.send(f"Set {user.mention}'s score as {amount} and {amount / 10} as their dc!")
+        await ctx.send(f"Set {user.mention}'s score as {amount} and {round(amount / 10)} as their dc!")
     
     @commands.command()
     @commands.has_role('Moderator')
