@@ -1,5 +1,5 @@
 enhanced-dpy
-google-cloud-firetore
+google-cloud-firestore
 henostools
 hcolours
 jishaku

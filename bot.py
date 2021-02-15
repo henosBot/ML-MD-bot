@@ -1,11 +1,11 @@
 import os
+print('installing packages')
 os.system('pip install -r requirements.txt')
 
 import discord
 from tools.mlmd_bot import MLMD_bot
 from discord_slash import SlashCommand
 import dotenv
-import os
 import jishaku
 
 dotenv.load_dotenv()
@@ -25,6 +25,9 @@ extentions = [
   'cogs.help'
 ]
 for extention in extentions:
+    print(f'Loading extension {extention}')
     bot.load_extension(extention)
+
+os.system('clear')
 
 bot.run(token)

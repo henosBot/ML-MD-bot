@@ -2,14 +2,13 @@ import discord
 import json
 import datetime
 from discord.ext import commands
-from discord_slash import SlashCommand, cog_ext
+from discord_slash import cog_ext
 from discord_slash.utils import manage_commands
 from tools.database import database as db
 
 class Submissions(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.bot.slash.get_cog_commands(self)
 
     def cog_unload(self):
         self.bot.slash.remove_cog_commands(self)
