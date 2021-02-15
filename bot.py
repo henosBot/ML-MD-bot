@@ -5,11 +5,11 @@ os.system('pip install -r requirements.txt')
 import discord
 from tools.mlmd_bot import MLMD_bot
 from discord_slash import SlashCommand
-import dotenv
+import toml
 import jishaku
 
-dotenv.load_dotenv()
-token = os.getenv('TOKEN')
+toml = toml.load('secrets.toml')
+token = toml['TOKEN']
 
 bot = MLMD_bot()
 bot.slash = SlashCommand(bot, sync_commands=True)
