@@ -1,3 +1,6 @@
+import os
+os.system('pip install -r requirements.txt')
+
 import discord
 from tools.mlmd_bot import MLMD_bot
 from discord_slash import SlashCommand
