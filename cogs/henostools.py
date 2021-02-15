@@ -27,7 +27,7 @@ class henostools(commands.Cog):
     @commands.has_role('Moderator')
     async def set(self, ctx, user : discord.Member, amount : int):
         await db.set(user, 'score', amount)
-        await db.set(user, 'design_count', amount / 10)
+        await db.set(user, 'design_count', round(amount / 10))
         await ctx.send(f"Set {user.mention}'s score as {amount} and {amount / 10} as their dc!")
     
     @commands.command()
