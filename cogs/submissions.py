@@ -39,8 +39,6 @@ class Submissions(commands.Cog):
     )
     async def new(self, ctx, name : str, design : int = None, msg_id : int = None):
         await ctx.respond()
-        await db.save(ctx.author, 'score', 10)
-        await db.save(ctx.author, 'design_count', 1)
         if design != None:
             embed=discord.Embed(
                 title=f'{ctx.author.name} has posted a new {name}',
@@ -51,6 +49,8 @@ class Submissions(commands.Cog):
             channel = 747144603077050498
             channel = ctx.guild.get_channel(channel)
             await channel.send('<@&747148925219111002>', embed=embed)
+            await db.save(ctx.author, 'score', 10)
+            await db.save(ctx.author, 'design_count', 1)
         elif msg_id != None:
             design = str(await ctx.channel.fetch_message(msg_id))
             embed=discord.Embed(
@@ -62,6 +62,8 @@ class Submissions(commands.Cog):
             channel = 747144603077050498
             channel = ctx.guild.get_channel(channel)
             await channel.send('<@&747148925219111002>', embed=embed)
+            await db.save(ctx.author, 'score', 10)
+            await db.save(ctx.author, 'design_count', 1)
         else:
             await ctx.channel.send('hmm, you need to have sent the design *somewhere*')
     
